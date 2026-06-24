@@ -365,6 +365,30 @@ body {
   color: #3a1870;
 }
 
+.article .content .callout-yellow {
+  background: #fdfae8;
+  border-left: 4px solid #c0a010;
+  padding: 12px 16px;
+  border-radius: 0 8px 8px 0;
+  margin: 16px 0;
+  font-size: 14px;
+  color: #6a5010;
+}
+
+.article .content .tag-hold { display:inline-block; font-size:11px; font-weight:600; padding:3px 9px; border-radius:4px; background:#f3eff9; color:#5a30a0; }
+
+.article .content .note-row { display:flex; align-items:flex-start; gap:8px; font-size:13px; color:#555; margin-bottom:7px; }
+.article .content .note-dot { width:5px; height:5px; border-radius:50%; flex-shrink:0; margin-top:7px; }
+.article .content .dot-red { background:#c03030; }
+.article .content .dot-green { background:#4a9a18; }
+.article .content .dot-blue { background:#2060c0; }
+.article .content .dot-orange { background:#c07820; }
+
+.article .content .stock-label { display:inline-block; font-size:12px; font-weight:700; padding:4px 12px; border-radius:6px; }
+.article .content .stock-label-s { background:#faeaea; color:#b01818; border:1px solid #f0c0c0; }
+.article .content .stock-label-warn { background:#faf0e0; color:#904010; border:1px solid #f0d0a0; }
+.article .content .stock-label-wait { background:#faf0e0; color:#904010; border:1px solid #f0d0a0; }
+
 .article .content .metrics-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
