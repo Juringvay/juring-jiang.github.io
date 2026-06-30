@@ -23,6 +23,10 @@
     <a href="?tag=复盘">复盘</a>
     <a href="?tag=个人随笔">个人随笔</a>
   </div>
+  <div class="sidebar-cats">
+    <span class="cat-label">月份</span>
+    <a href="?month=6">6月</a>
+  </div>
 </aside>
 
 <main class="main">
@@ -141,27 +145,42 @@
 (function(){
   var params = new URLSearchParams(location.search);
   var tag = params.get('tag');
-  if (!tag) return;
+  var month = params.get('month');
+  if (!tag && !month) return;
   var cards = document.querySelectorAll('.post-card');
   var any = false;
   cards.forEach(function(c){
-    var tags = c.querySelectorAll('.tag');
-    var match = false;
-    tags.forEach(function(t){
-      if (t.textContent.trim() === tag) match = true;
-    });
-    if (!match) { c.style.display = 'none'; }
+    var show = true;
+    if (tag) {
+      var tags = c.querySelectorAll('.tag');
+      var match = false;
+      tags.forEach(function(t){
+        if (t.textContent.trim() === tag) match = true;
+      });
+      if (!match) show = false;
+    }
+    if (month) {
+      var meta = c.querySelector('.meta');
+      if (!meta || meta.textContent.indexOf('2026-0' + month) === -1) show = false;
+    }
+    if (!show) { c.style.display = 'none'; }
     else { any = true; }
   });
+  var label = tag || (month + '月');
   if (!any) {
-    document.querySelector('.hero h1').textContent = '没有「' + tag + '」分类的文章';
+    document.querySelector('.hero h1').textContent = '没有匹配的文章';
     document.querySelector('.hero p').textContent = '';
   } else {
-    document.querySelector('.hero h1').textContent = tag;
+    document.querySelector('.hero h1').textContent = label;
     document.querySelector('.hero p').textContent = '';
   }
   document.querySelectorAll('.sidebar-cats a').forEach(function(a){
-    a.classList.toggle('active', a.getAttribute('href') === '?tag=' + tag);
+    var href = a.getAttribute('href');
+    var isActive = false;
+    if (tag && href === '?tag=' + tag) isActive = true;
+    if (month && href === '?month=' + month) isActive = true;
+    if (!tag && !month && href === './') isActive = true;
+    a.classList.toggle('active', isActive);
   });
 })();
 </script>
